@@ -1,9 +1,6 @@
 import requests
 import json
 
-#API KEY                  : 3065cd06b2144575996ebf0844ced696
-#OAuth client_id          : 23340
-
 #Bungie membership ID     : 17673335
 #Bungie memberShip Type   : 254
 #Destiny 2 display name   : guitarhead42#1725
