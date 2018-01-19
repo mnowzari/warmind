@@ -28,9 +28,10 @@ def dump_json_to_file(filename, json_data):
     #request = request.json()
     with open(filename, 'w') as outfile:
         json.dump(json_data, outfile, indent=4)
-    
+
 def authorize():
-    r = requests.get("https://www.bungie.net/en/OAuth/Authorize", headers=HEADERS)
+    r = requests.get("https://www.bungie.net/en/OAuth/Authorize?client_id=23340&response_type=code", headers=HEADERS)
+    print (r)
     return r
 
 def searchUsers(query):
@@ -40,11 +41,16 @@ def searchUsers(query):
     return r.json()
 
 def getEquippedInventory(destinyMembershipType, destinyMembershipId):    
-    r = requests.get(base_url + "/" + str(destinyMembershipType) + "/Profile/" + str(destinyMembershipId) + "/?lc=en&components=205", headers=HEADERS);
+    r = requests.get(base_url + "/" + str(destinyMembershipType) + "/Profile/" + str(destinyMembershipId) + "/?lc=en&components=205", headers=HEADERS)
+    return r.json()
+    
+def getCurrency(destinyMembershipType, destinyMembershipId):
+    r = requests.get(base_url + "/" + str(destinyMembershipType) + "/Profile/" + str(destinyMembershipId) + "/?lc=en&components=103", headers=HEADERS)
+    print (r.json())
     return r.json()
 
 def getMembershipsById(membershipId, membershipType):    
-    r = requests.get("https://www.bungie.net/platform/User/GetMembershipsById/" + str(membershipId) + "/" + str(membershipType) + "/", headers=HEADERS);
+    r = requests.get("https://www.bungie.net/platform/User/GetMembershipsById/" + str(membershipId) + "/" + str(membershipType) + "/", headers=HEADERS)
     return r.json()
 
 def getManifest():
@@ -52,17 +58,21 @@ def getManifest():
     return r.json()
 
 def getHistoricalStats(destinyMembershipType, destinyMembershipId, characterId):
-    r = requests.get(base_url + "/"+ str(destinyMembershipType) + "/Account/" + str(destinyMembershipId) + "/Character/" + str(characterId) + "/Stats/", headers=HEADERS);
+    r = requests.get(base_url + "/"+ str(destinyMembershipType) + "/Account/" + str(destinyMembershipId) + "/Character/" + str(characterId) + "/Stats/", headers=HEADERS)
     return r.json()
 
 def getActivityHistory(destinyMembershipType, destinyMembershipId, characterId, activity_mode):    
-    r = requests.get(base_url + "/" + str(destinyMembershipType) + "/Account/" + str(destinyMembershipId) + "/Character/" + str(characterId) + "/Stats/Activities/?lc=en&components=" + str(activity_mode), headers=HEADERS);
+    r = requests.get(base_url + "/" + str(destinyMembershipType) + "/Account/" + str(destinyMembershipId) + "/Character/" + str(characterId) + "/Stats/Activities/?lc=en&components=" + str(activity_mode), headers=HEADERS)
     return r.json()
     
 def getCharacter(destinyMembershipType, destinyMembershipId):    
-    r = requests.get(base_url + "/" + str(destinyMembershipType) + "/Profile/" + str(destinyMembershipId) + "/?lc=en&components=200", headers=HEADERS);
+    r = requests.get(base_url + "/" + str(destinyMembershipType) + "/Profile/" + str(destinyMembershipId) + "/?lc=en&components=200", headers=HEADERS)
     return r.json()
 
+def getUniqueWeaponHistory(destinyMembershipType, destinyMembershipId, characterId):
+    r = requests.get(base_url + "/" + str(destinyMembershipType) + "/Account/" + str(destinyMembershipId) + "/Character/" + str(characterId) + "/Stats/", headers=HEADERS)
+    return r.json()
+    
 def destinyManifestRequestStatDefinition(stat_id):
     r = requests.get("https://www.bungie.net/platform/Destiny2/Manifest/DestinyStatDefinition/" + str(stat_id) + "/", headers=HEADERS)
     return r.json()
@@ -71,13 +81,34 @@ def destinyManifestRequestInventoryDefinition(hash_id):
     r = requests.get("https://www.bungie.net/platform/Destiny2/Manifest/DestinyInventoryItemDefinition/" + str(hash_id) + "/", headers=HEADERS)
     return r.json()
 
-def updateLocalFiles():
-    #authorize()                 #WIP
+def destinyManifestRequestMilestoneDefinition(hash_id):
+    r = requests.get(base_url + "/Manifest/DestinyMilestoneDefinition/" + str(hash_id), headers=HEADERS)
+    return r.json()
+    
+def destinyManifestRequestActivityDefinition(hash_id):
+    r = requests.get(base_url + "/Manifest/DestinyActivityDefinition/" + str(hash_id), headers=HEADERS)
+    return r.json()
+    
+def destinyManifestRequestVendorDefinition(hash_id):
+    r = requests.get(base_url + "/Manifest/DestinyVendorDefinition/" + str(hash_id), headers=HEADERS)
+    return r.json()
 
-    print ("Getting profile...")
+def destinyManifestRequestObjectiveDefinition(hash_id):
+    r = requests.get(base_url + "/Manifest/DestinyObjectiveDefinition/" + str(hash_id), headers=HEADERS)
+    return r.json()
+    
+def destinyMilestoneInformation():
+    r = requests.get(base_url + "/Milestones/", headers=HEADERS)
+    return r.json()
+
+def updateLocalFiles():
+    authorize()                 #WIP
+
+    print ("Getting equipped inventory...")
     r = getEquippedInventory(4, 4611686018472070177)         #working    
     dump_json_to_file('d2_user_equipped_inventory.json', r)
     print ("    " + r['ErrorStatus'])
+    
     print ("    Output succesfully dumped to file d2_user_equipped_inventory.json")
 
     print ("Getting D2 memberships by Bungie ID...")
