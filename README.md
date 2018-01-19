@@ -4,6 +4,9 @@ Warmind is a simple command-line stat puller for Destiny 2. It uses the Destiny 
 
 This is a work in progress. 
 
+To run the program, simply call the following from your command line:
+	> python destiny2_warmind.py
+
 List of commands:
 
 basic_info: Prints basic information regarding the provided account
