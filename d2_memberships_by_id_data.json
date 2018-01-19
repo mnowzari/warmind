@@ -1,0 +1,40 @@
+{
+    "Response": {
+        "bungieNetUser": {
+            "blizzardDisplayName": "guitarhead42#1725",
+            "localeInheritDefault": false,
+            "uniqueName": "17673335",
+            "membershipId": "17673335",
+            "lastUpdate": "2018-01-10T06:04:36.329Z",
+            "showGroupMessaging": true,
+            "statusText": "",
+            "displayName": "guitarhead42",
+            "profileTheme": 0,
+            "statusDate": "0001-01-01T00:00:00Z",
+            "about": "",
+            "successMessageFlags": "0",
+            "locale": "en",
+            "isDeleted": false,
+            "showActivity": true,
+            "profilePicture": 0,
+            "userTitle": 0,
+            "profilePicturePath": "/img/profile/avatars/default_avatar.gif",
+            "profileThemeName": "d2cover",
+            "userTitleDisplay": "Newbie",
+            "firstAccess": "2018-01-10T06:04:36.329Z"
+        },
+        "destinyMemberships": [
+            {
+                "displayName": "guitarhead42#1725",
+                "membershipType": 4,
+                "iconPath": "",
+                "membershipId": "4611686018472070177"
+            }
+        ]
+    },
+    "Message": "Ok",
+    "ErrorStatus": "Success",
+    "ThrottleSeconds": 0,
+    "MessageData": {},
+    "ErrorCode": 1
+}

@@ -1,0 +1,282 @@
+import json
+import requests
+import destiny2_API as d2
+
+#data = load_json_file("d2_historical_data.json")
+#print (data["Response"]["raid"]["allTime"]["highestCharacterLevel"]["basic"]["displayValue"])
+
+membershipID          = 0
+membershipType        = -1 #or 254 for PC-only
+destinyMembershipType = 0
+destinyMembershipID   = 0
+destinyCharacters     = []
+
+def load_json_file(filename):
+    data = 0
+    with open(filename) as json_file:
+        data = json.load(json_file)
+    return data
+
+def get_access_information(username): #returns array of access creds 
+    global membershipID, destinyMembershipType, destinyMembershipID, destinyCharacters
+    access_info = []
+    
+    if membershipID == 0:
+        info = d2.searchUsers(username)
+        
+        if len(info['Response']) > 0:
+            
+            membershipID = int(info['Response'][0]['membershipId'])
+            
+            info = d2.getMembershipsById(membershipID, membershipType)
+
+            if 'destinyMemberships' in info['Response'] and len(info['Response']['destinyMemberships']) > 0:
+                destinyMembershipType = int(info['Response']['destinyMemberships'][0]['membershipType'])
+                destinyMembershipID = int(info['Response']['destinyMemberships'][0]['membershipId'])
+
+                character = d2.getCharacter(destinyMembershipType, destinyMembershipID)
+                if character['ErrorCode'] != 1601: #in the event Bungie's servers cannot find a Destiny account
+                    character = character['Response']['characters']['data']
+                    
+                    for key, value in character.items():
+                        destinyCharacters.append(key)
+                        
+                    access_info = [membershipID, membershipType, destinyMembershipType, destinyMembershipID, destinyCharacters]
+                    return access_info
+                else: 
+                    return 0
+            else:
+                return 0
+        else: 
+            return 0
+    
+def print_basic_info(data):
+    print ()
+    print ("Bungie and Destiny 2 Account Data")
+    print ("------------------------------------------------------------------------------")
+    print ("-Display Name               : " + data['Response']['bungieNetUser']['displayName'])
+    print ("-Bungie Membership ID       : " + data['Response']['bungieNetUser']['uniqueName'])
+    print ("-Destiny 2 Membership ID    : " + data['Response']['destinyMemberships'][0]['membershipId'])
+
+    membershipType = data['Response']['destinyMemberships'][0]['membershipType']
+
+    if (membershipType == 0):
+        print ("-Destiny 2 Membership Type  : " + str(data['Response']['destinyMemberships'][0]['membershipType']) + " (None)")
+    elif (membershipType == 1):
+        print ("-Destiny 2 Membership Type  : " + str(data['Response']['destinyMemberships'][0]['membershipType']) + " (Xbox)")
+    elif (membershipType == 2):
+        print ("-Destiny 2 Membership Type  : " + str(data['Response']['destinyMemberships'][0]['membershipType']) + " (PlayStation)")
+    elif (membershipType == 4):
+        print ("-Destiny 2 Membership Type  : " + str(data['Response']['destinyMemberships'][0]['membershipType']) + " (PC)")
+    print ()
+#the following are helper functions for determining race, gender, and class names from the given int values
+def parse_race(race_type):
+    if race_type == 0:
+        return "Human"
+    elif race_type == 1:
+        return "Awoken"
+    elif race_type == 2:
+        return "Exo"
+    elif race_type == 3:
+        return "Unknown"
+
+def parse_gender(gender_type):
+    if gender_type == 0:
+        return "Male"
+    elif gender_type == 1:
+        return "Female"
+    elif gender_type == 2:
+        return "Unkown"
+
+def parse_class(class_type):
+    if class_type == 0:
+        return "Titan"
+    elif class_type == 1:
+        return "Hunter"
+    elif class_type == 2:
+        return "Warlock"
+    elif class_type == 3:
+        return "Unknown"
+
+def print_character_sheet(data):
+    global destinyMembershipType
+    global destinyMembershipID
+    print ()
+    print ("Destiny 2 Character Sheet")
+    print ("------------------------------------------------------------------------------")
+    
+    data = data['Response']['characters']['data']
+    #i = 1
+    for key, value in data.items(): #key is the character ID. This is to handle accounts with more than one character
+        print ("Character ID: ", key)
+        print ("    Race   : " + parse_race(data[key]['raceType']))
+        print ("    Gender : " + parse_gender(data[key]['genderType']))
+        print ()
+        print ("    Class  : " + parse_class(data[key]['classType']))
+        print ("    Level  : " + str(data[key]['baseCharacterLevel']))
+        print ("    Power  : " + str(data[key]['light']))
+        print ()
+        
+        stats = data[key]['stats'] #The following makes an API call to determine stat names from the hash codes
+        for i, k in stats.items():
+            
+            stat_def = d2.destinyManifestRequestStatDefinition(i)
+            
+            if 'name' in stat_def['Response']['displayProperties']:
+                name = stat_def['Response']['displayProperties']['name']
+                if name != 'Power':
+                    if stats[i] != 0:
+                        print ("    " + name + ": " + str(stats[i]))
+        
+        print ()
+        print ("    Level Cap              : " + str(data[key]['levelProgression']['levelCap']))
+        print ("    Weekly Progress        : " + str(data[key]['levelProgression']['weeklyProgress']))
+        print ("    Daily Progress         : " + str(data[key]['levelProgression']['dailyProgress']))
+        print ("    Progress to Next Level : " + str(data[key]['levelProgression']['progressToNextLevel']))
+        print ()
+        
+        time_spent_playing = round(int(data[key]['minutesPlayedTotal']) / 60)
+        
+        inven_data = d2.getEquippedInventory(destinyMembershipType, destinyMembershipID)
+        inven_data = inven_data['Response']['characterEquipment']['data']
+        items = inven_data[key]["items"]
+        
+        print ("    Equipped Items:")
+        for t in range (0, len(items)):
+            hash_id = items[t]['itemHash']
+            name_json = d2.destinyManifestRequestInventoryDefinition(hash_id)
+            name = name_json['Response']['displayProperties']['name']
+            type_and_tier = name_json['Response']['itemTypeAndTierDisplayName']
+            if (type_and_tier != ""): 
+                type_and_tier = ", " + type_and_tier
+            print ("     -" + name + type_and_tier)
+            t = t + 1
+        
+        print ()
+        print ("    ~"+ str(time_spent_playing) + " hours on record")
+        print ()
+        
+
+def historical_data_helper(data):
+    kills = int(data['kills']['basic']['displayValue'])
+    deaths = int(data['deaths']['basic']['displayValue'])
+    print ("    Total Kills            : " + str(kills))
+    print ("    Total Deaths           : " + str(deaths))
+    print ("    K/D                    : " + str(kills/deaths))
+
+    print ("    Assists                : " + data['assists']['basic']['displayValue'])
+
+    print ("    Best Weapon Type       : " + data['weaponBestType']['basic']['displayValue'])
+    print ("    Precision Kills        : " + data['precisionKills']['basic']['displayValue'])
+    print ("    Longest Kill Distance  : " + data['longestKillDistance']['basic']['displayValue'] + "m")
+    print ("    Average Kill Distance  : " + data['averageKillDistance']['basic']['displayValue'] + "m")
+
+    print ("        -Grenade Kills           : " + data["weaponKillsGrenade"]['basic']['displayValue'])
+    print ("        -Melee Kills             : " + data["weaponKillsMelee"]['basic']['displayValue'])
+    print ("        -Sidearm Kills           : " + data["weaponKillsSideArm"]['basic']['displayValue'])
+    print ("        -Handcannon Kills        : " + data["weaponKillsHandCannon"]['basic']['displayValue'])
+    print ("        -SMG Kills               : " + data["weaponKillsSubmachinegun"]['basic']['displayValue'])
+    print ("        -Pulse Rifle Kills       : " + data["weaponKillsPulseRifle"]['basic']['displayValue'])
+    print ("        -Auto Rifle Kills        : " + data["weaponKillsAutoRifle"]['basic']['displayValue'])
+    print ("        -Shotgun Kills           : " + data["weaponKillsShotgun"]['basic']['displayValue'])
+    print ("        -Scout Rifle Kills       : " + data["weaponKillsScoutRifle"]['basic']['displayValue'])
+    print ("        -Sniper Rifle Kills      : " + data["weaponKillsSniper"]['basic']['displayValue'])
+    print ("        -Rocket Launcher Kills   : " + data["weaponKillsRocketLauncher"]['basic']['displayValue'])
+    print ("        -Grenade Launcher Kills  : " + data["weaponKillsGrenadeLauncher"]['basic']['displayValue'])
+    print ("        -Trace Rifle Kills       : " + data["weaponKillsTraceRifle"]['basic']['displayValue'])
+    print ("        -Fusion Rifle Kills      : " + data["weaponKillsFusionRifle"]['basic']['displayValue'])
+    print ("        -Grenade Launcher Kills  : " + data["weaponKillsGrenadeLauncher"]['basic']['displayValue'])
+    print ("        -Sword Kills             : " + data["weaponKillsSword"]['basic']['displayValue'])
+    print ("        -Relic Kills             : " + data["weaponKillsRelic"]['basic']['displayValue'])
+    print ("        -Ability Kills           : " + data["weaponKillsAbility"]['basic']['displayValue'])
+    print ("        -Super Kills             : " + data["weaponKillsSuper"]['basic']['displayValue'])
+    print ()
+    print ("    Best Single-Game Kills  : " + data['bestSingleGameKills']['basic']['displayValue'])
+    print ("    Longest Killing Spree   : " + data['longestKillSpree']['basic']['displayValue'])
+    print ("    Efficiency              : " + data['efficiency']['basic']['displayValue'])
+    print ()
+    print ("    Orbs Dropped            : " + data['orbsDropped']['basic']['displayValue'])
+    print ("    Orbs Gathered           : " + data['orbsGathered']['basic']['displayValue'])
+    print ()
+    print ("    Suicides                : " + data['suicides']['basic']['displayValue'])
+    print ("    Average Lifespan        : " + data['averageLifespan']['basic']['displayValue'])
+    print ("    Resurrections Performed : " + data['resurrectionsPerformed']['basic']['displayValue'])
+    print ("    Resurrections Recieved  : " + data['resurrectionsReceived']['basic']['displayValue'])
+    print ()
+        
+def print_historical_strike_data(input_data):
+    print ("***All Historical Strike Data***")
+    if 'allTime' in input_data['Response']['allStrikes']:
+        data = input_data['Response']['allStrikes']['allTime']
+        historical_data_helper(data)
+        print ("    "+ data['secondsPlayed']['basic']['displayValue'] + " spent in activity")
+        print ()
+    else:
+        print ("NO DATA FOUND FOR THIS GUARDIAN")
+        print ()        
+    
+def print_historical_pvp_data(input_data):    
+    print ("***All Historical PvP Data***")
+    if 'allTime' in input_data['Response']['allPvP']:
+        data = input_data['Response']['allPvP']['allTime']
+
+        print ("    Combat Rating          : " + data["combatRating"]['basic']['displayValue'])
+        print ()
+        historical_data_helper(data)
+        print ("    Objectives Completed    : " + data["objectivesCompleted"]['basic']['displayValue'])
+        print ("    Activities Won          : " + data["activitiesWon"]['basic']['displayValue'])
+        print ("    Win-Loss Ratio          : " + data["winLossRatio"]['basic']['displayValue'])
+        print ("    Best Single Game Score  : " + data["bestSingleGameScore"]['basic']['displayValue'])
+        print ("    Avg per-game Team Score : " + data["teamScore"]['pga']['displayValue'])
+        print ("    Avg Score per life      : " + data["averageScorePerLife"]['basic']['displayValue'])
+
+        print ()
+        print ("    "+ data['secondsPlayed']['basic']['displayValue'] + " spent in activity")
+        print ()
+    else:
+        print ("NO DATA FOUND FOR THIS GUARDIAN")
+        print ()
+        
+def print_historical_raid_data(input_data):
+    print ("***All Historical Raid Data***")
+    if 'allTime' in input_data['Response']['raid']:
+        data = input_data['Response']['raid']['allTime']
+        historical_data_helper(data)
+        print ("    "+ data['secondsPlayed']['basic']['displayValue'] + " spent in activity")
+        print ()
+    else:
+        print ("NO DATA FOUND FOR THIS GUARDIAN")
+        print ()
+        
+def print_historical_story_data(input_data):
+    print ("***All Historical Story Data***")
+    if 'allTime' in input_data['Response']['story']:    
+        data = input_data['Response']['story']['allTime']
+        historical_data_helper(data)
+        print ("    "+ data['secondsPlayed']['basic']['displayValue'] + " spent in activity")
+        print ()
+    else: 
+        print ("NO DATA FOUND FOR THIS GUARDIAN")
+        print ()
+        
+def print_historical_pve_data(input_data):
+    print ("***All Historical PvE Data***")
+    if 'allTime' in input_data['Response']['patrol']:    
+        data = input_data['Response']['patrol']['allTime']
+        historical_data_helper(data)
+        print ("    Objectives Completed    : " + data["objectivesCompleted"]['basic']['displayValue'])
+        print ("    Adventures Completed    : " + data["adventuresCompleted"]['basic']['displayValue'])
+        print ("    Public Events Completed : " + data["publicEventsCompleted"]['basic']['displayValue'])
+        print ("    Heroic Events Completed : " + data["heroicPublicEventsCompleted"]['basic']['displayValue'])
+        print ("    Activities Entered      : " + data["activitiesEntered"]['basic']['displayValue'])
+        print ()
+        print ("    "+ data['secondsPlayed']['basic']['displayValue'] + " spent in activity")
+        print ()
+    else:
+        print ("NO DATA FOUND FOR THIS GUARDIAN")
+        print ()
+        
+#d2.updateLocalFiles()
+
+
+

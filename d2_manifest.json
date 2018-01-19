@@ -1,0 +1,46 @@
+{
+    "Response": {
+        "mobileGearCDN": {
+            "Geometry": "/common/destiny2_content/geometry/platform/mobile/geometry",
+            "Shader": "/common/destiny2_content/geometry/platform/mobile/shaders",
+            "Gear": "/common/destiny2_content/geometry/gear",
+            "PlateRegion": "/common/destiny2_content/geometry/platform/mobile/plated_textures",
+            "Texture": "/common/destiny2_content/geometry/platform/mobile/textures"
+        },
+        "mobileAssetContentPath": "/common/destiny2_content/sqlite/asset/asset_sql_content_c93a605d677c3271b69b6fd1e4b5378d.content",
+        "mobileClanBannerDatabasePath": "/common/destiny2_content/clanbanner/clanbanner_sql_content_13bcd2427f07d0121bb532a1a0638ba4.content",
+        "version": "61252.17.12.02.0200-21",
+        "mobileGearAssetDataBases": [
+            {
+                "version": 0,
+                "path": "/common/destiny2_content/sqlite/asset/asset_sql_content_c93a605d677c3271b69b6fd1e4b5378d.content"
+            },
+            {
+                "version": 1,
+                "path": "/common/destiny2_content/sqlite/asset/asset_sql_content_1d9c65ca1aca3e5d8bdd78507d3cb594.content"
+            },
+            {
+                "version": 2,
+                "path": "/common/destiny2_content/sqlite/asset/asset_sql_content_1d9c65ca1aca3e5d8bdd78507d3cb594.content"
+            }
+        ],
+        "mobileWorldContentPaths": {
+            "de": "/common/destiny2_content/sqlite/de/world_sql_content_2b4574a3b4d2630f1c4caf33b82f551c.content",
+            "it": "/common/destiny2_content/sqlite/it/world_sql_content_c1f3cf565ac523d67aa2400c62f54526.content",
+            "es-mx": "/common/destiny2_content/sqlite/es-mx/world_sql_content_57e9ec72f9bddfdaa8c9530cd8c47fb0.content",
+            "en": "/common/destiny2_content/sqlite/en/world_sql_content_fe1556ccd75b15523be523de657a3978.content",
+            "ja": "/common/destiny2_content/sqlite/ja/world_sql_content_ef1c701cbb01ece611d76907a0dede48.content",
+            "es": "/common/destiny2_content/sqlite/es/world_sql_content_a9fff5e72f151538f4d93b84d0e573ed.content",
+            "fr": "/common/destiny2_content/sqlite/fr/world_sql_content_ee6b91b4657483900a2c915e8c8eab42.content",
+            "ru": "/common/destiny2_content/sqlite/ru/world_sql_content_a63e02d2efd5471eae4e60df51bbb8e4.content",
+            "zh-cht": "/common/destiny2_content/sqlite/zh-cht/world_sql_content_6520c83b1233b3dcde1ee1da587d1648.content",
+            "pl": "/common/destiny2_content/sqlite/pl/world_sql_content_a9034b5e8702689bcc76232060859d5d.content",
+            "pt-br": "/common/destiny2_content/sqlite/pt-br/world_sql_content_cebf959dbe0baa88d166edf7a4ad7d1e.content"
+        }
+    },
+    "Message": "Ok",
+    "ErrorStatus": "Success",
+    "ThrottleSeconds": 0,
+    "MessageData": {},
+    "ErrorCode": 1
+}
