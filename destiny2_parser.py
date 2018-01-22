@@ -270,13 +270,24 @@ def print_historical_pve_data(input_data):
         print ("    Heroic Events Completed : " + data["heroicPublicEventsCompleted"]['basic']['displayValue'])
         print ("    Activities Entered      : " + data["activitiesEntered"]['basic']['displayValue'])
         print ()
-        print ("    "+ data['secondsPlayed']['basic']['displayValue'] + " spent in activity")
+        print ("    " + data['secondsPlayed']['basic']['displayValue'] + " spent in activity")
         print ()
     else:
         print ("NO DATA FOUND FOR THIS GUARDIAN")
         print ()
-        
-#d2.updateLocalFiles()
 
+def print_current_milestone_information(input_data):
+    data = input_data['Response']
+    print ("***MILESTONE INFORMATION***")
+    for key, value in data.items():
+        mile_hash = key
+        
+        if 'availableQuests' in data[mile_hash]:            
+            if 'activity' in data[mile_hash]['availableQuests'][0]:
+                act_hash = data[mile_hash]['availableQuests'][0]['activity']['activityHash']
+                print (act_hash)
+                act_json = d2.destinyManifestRequestActivityDefinition(int(act_hash))
+                print (act_json)
+            elif 'questItemHash' in data[mile_hash]['availableQuests'][0]:
 
 

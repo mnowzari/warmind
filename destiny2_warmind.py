@@ -73,8 +73,12 @@ def main():
                     dparse.print_historical_story_data(data)
             elif user_in == "new_guard":
                 print ("WIP")
+            elif user_in == "!milestones":
+                data = d2.destinyMilestoneInformation()
+                if data != 0:
+                    dparse.print_current_milestone_information(data)
             elif user_in == "!dump":
-                d2.updateLocalFiles()
+                d2.dumpData(membershipID, membershipType, destinyMembershipType, destinyMembershipID, destinyCharacters[0])
             elif user_in == "!q":
                 break
             else: print ("Unkown command.")

@@ -89,6 +89,10 @@ def destinyManifestRequestActivityDefinition(hash_id):
     r = requests.get(base_url + "/Manifest/DestinyActivityDefinition/" + str(hash_id), headers=HEADERS)
     return r.json()
     
+def destinyManifestRequestQuestDefinition(hash_id):
+    r = requests.get(base_url + "/Manifest/DestinyMilestoneQuestDefinition/" + str(hash_id), headers=HEADERS)
+    return r.json()    
+    
 def destinyManifestRequestVendorDefinition(hash_id):
     r = requests.get(base_url + "/Manifest/DestinyVendorDefinition/" + str(hash_id), headers=HEADERS)
     return r.json()
@@ -101,18 +105,16 @@ def destinyMilestoneInformation():
     r = requests.get(base_url + "/Milestones/", headers=HEADERS)
     return r.json()
 
-def updateLocalFiles():
-    authorize()                 #WIP
-
+def dumpData(membershipId, membershipType, destinyMembershipType, destinyMembershipId, characterId):
     print ("Getting equipped inventory...")
-    r = getEquippedInventory(4, 4611686018472070177)         #working    
+    r = getEquippedInventory(destinyMembershipType, destinyMembershipId)         #working    
     dump_json_to_file('d2_user_equipped_inventory.json', r)
     print ("    " + r['ErrorStatus'])
     
     print ("    Output succesfully dumped to file d2_user_equipped_inventory.json")
 
     print ("Getting D2 memberships by Bungie ID...")
-    r = getMembershipsById(17673335, 254)    #working
+    r = getMembershipsById(membershipId, membershipType)    #working
     dump_json_to_file('d2_memberships_by_id_data.json', r)
     print ("    " + r['ErrorStatus'])
     print ("    Output succesfully dumped to file d2_memberships_by_id_data.json")
@@ -124,14 +126,21 @@ def updateLocalFiles():
     print ("    Output succesfully dumped to file d2_manifest.json")
 
     print ("Getting D2 Character Stats...")
-    r = getCharacter(4, 4611686018472070177)          #working
+    r = getCharacter(destinyMembershipType, destinyMembershipId)          #working
     dump_json_to_file('d2_character_data.json', r)
     print ("    " + r['ErrorStatus'])
     print ("    Output succesfully dumped to file d2_character_stats.json")
 
     print ("Getting D2 Character Historical Stats...")
-    r = getHistoricalStats(4, 4611686018472070177, 2305843009310558777)    #working
+    r = getHistoricalStats(destinyMembershipType, destinyMembershipId, characterId)    #working
     dump_json_to_file('d2_historical_data.json', r)
     print ("    " + r['ErrorStatus'])
     print ("    Output succesfully dumped to file d2_historical_data.json")
+    
+    print ("Getting D2 Current Milestone Information...")
+    r = destinyMilestoneInformation()
+    dump_json_to_file('d2_milestone_information.json', r)
+    print ("    " + r['ErrorStatus'])
+    print ("    Output succesfully dumped to file d2_milestone_information.json")
+    
     print ()
