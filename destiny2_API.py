@@ -26,6 +26,7 @@ def jsonify_to_console(request):
 
 def dump_json_to_file(filename, json_data):
     #request = request.json()
+    filename = "datadump/" + filename
     with open(filename, 'w') as outfile:
         json.dump(json_data, outfile, indent=4)
 

@@ -1,0 +1,195 @@
+{
+    "Message": "Ok",
+    "MessageData": {},
+    "Response": {
+        "itemComponents": {},
+        "characterEquipment": {
+            "data": {
+                "2305843009310558777": {
+                    "items": [
+                        {
+                            "state": 0,
+                            "transferStatus": 1,
+                            "itemHash": 1644162710,
+                            "quantity": 1,
+                            "itemInstanceId": "6917529049295084047",
+                            "lockable": true,
+                            "bucketHash": 1498876634,
+                            "location": 1,
+                            "bindStatus": 0
+                        },
+                        {
+                            "state": 0,
+                            "transferStatus": 1,
+                            "itemHash": 3762467076,
+                            "quantity": 1,
+                            "itemInstanceId": "6917529049119717621",
+                            "lockable": true,
+                            "bucketHash": 2465295065,
+                            "location": 1,
+                            "bindStatus": 0
+                        },
+                        {
+                            "state": 0,
+                            "transferStatus": 1,
+                            "itemHash": 3312073052,
+                            "quantity": 1,
+                            "itemInstanceId": "6917529049298012678",
+                            "lockable": true,
+                            "bucketHash": 953998645,
+                            "location": 1,
+                            "bindStatus": 0
+                        },
+                        {
+                            "state": 0,
+                            "transferStatus": 1,
+                            "itemHash": 197761152,
+                            "quantity": 1,
+                            "itemInstanceId": "6917529049125542358",
+                            "lockable": true,
+                            "bucketHash": 3448274439,
+                            "location": 1,
+                            "bindStatus": 0
+                        },
+                        {
+                            "state": 0,
+                            "transferStatus": 1,
+                            "itemHash": 107582877,
+                            "quantity": 1,
+                            "itemInstanceId": "6917529049507941720",
+                            "lockable": true,
+                            "bucketHash": 3551918588,
+                            "location": 1,
+                            "bindStatus": 0
+                        },
+                        {
+                            "state": 0,
+                            "transferStatus": 1,
+                            "itemHash": 10307688,
+                            "quantity": 1,
+                            "itemInstanceId": "6917529049541816717",
+                            "lockable": true,
+                            "bucketHash": 14239492,
+                            "location": 1,
+                            "bindStatus": 0
+                        },
+                        {
+                            "state": 0,
+                            "transferStatus": 1,
+                            "itemHash": 2048751167,
+                            "quantity": 1,
+                            "itemInstanceId": "6917529049295087777",
+                            "lockable": true,
+                            "bucketHash": 20886954,
+                            "location": 1,
+                            "bindStatus": 0
+                        },
+                        {
+                            "state": 0,
+                            "transferStatus": 1,
+                            "itemHash": 1742680797,
+                            "quantity": 1,
+                            "itemInstanceId": "6917529049799246826",
+                            "lockable": true,
+                            "bucketHash": 1585787867,
+                            "location": 1,
+                            "bindStatus": 0
+                        },
+                        {
+                            "state": 0,
+                            "transferStatus": 1,
+                            "itemHash": 89965910,
+                            "quantity": 1,
+                            "itemInstanceId": "6917529047161768150",
+                            "lockable": true,
+                            "bucketHash": 4023194814,
+                            "location": 1,
+                            "bindStatus": 0
+                        },
+                        {
+                            "state": 0,
+                            "transferStatus": 1,
+                            "itemHash": 3610177553,
+                            "quantity": 1,
+                            "itemInstanceId": "6917529049122682087",
+                            "lockable": true,
+                            "bucketHash": 2025709351,
+                            "location": 1,
+                            "bindStatus": 0
+                        },
+                        {
+                            "state": 0,
+                            "transferStatus": 1,
+                            "itemHash": 3140833559,
+                            "quantity": 1,
+                            "itemInstanceId": "6917529049116786926",
+                            "lockable": true,
+                            "bucketHash": 284967655,
+                            "location": 1,
+                            "bindStatus": 0
+                        },
+                        {
+                            "state": 0,
+                            "transferStatus": 3,
+                            "itemHash": 2958378809,
+                            "quantity": 1,
+                            "itemInstanceId": "6917529046333492979",
+                            "lockable": false,
+                            "bucketHash": 3284755031,
+                            "location": 1,
+                            "bindStatus": 0
+                        },
+                        {
+                            "state": 0,
+                            "transferStatus": 3,
+                            "itemHash": 1460578928,
+                            "quantity": 1,
+                            "itemInstanceId": "6917529047957899298",
+                            "lockable": false,
+                            "bucketHash": 4292445962,
+                            "location": 1,
+                            "bindStatus": 0
+                        },
+                        {
+                            "state": 0,
+                            "transferStatus": 3,
+                            "itemHash": 2484637938,
+                            "quantity": 1,
+                            "itemInstanceId": "6917529048610432581",
+                            "lockable": true,
+                            "bucketHash": 4274335291,
+                            "location": 1,
+                            "bindStatus": 0
+                        },
+                        {
+                            "state": 0,
+                            "transferStatus": 3,
+                            "itemHash": 4260536069,
+                            "quantity": 1,
+                            "itemInstanceId": "6917529049110789535",
+                            "lockable": true,
+                            "bucketHash": 3054419239,
+                            "location": 1,
+                            "bindStatus": 0
+                        },
+                        {
+                            "state": 0,
+                            "transferStatus": 3,
+                            "itemHash": 3282648591,
+                            "quantity": 1,
+                            "itemInstanceId": "6917529049817641782",
+                            "lockable": false,
+                            "bucketHash": 1269569095,
+                            "location": 1,
+                            "bindStatus": 0
+                        }
+                    ]
+                }
+            },
+            "privacy": 1
+        }
+    },
+    "ErrorCode": 1,
+    "ErrorStatus": "Success",
+    "ThrottleSeconds": 0
+}

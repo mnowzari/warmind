@@ -289,5 +289,5 @@ def print_current_milestone_information(input_data):
                 act_json = d2.destinyManifestRequestActivityDefinition(int(act_hash))
                 print (act_json)
             elif 'questItemHash' in data[mile_hash]['availableQuests'][0]:
-
+                print ()
 
