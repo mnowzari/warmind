@@ -27,7 +27,7 @@ def get_access_information(username): #returns array of access creds
         if len(info['Response']) > 0:
             
             membershipID = int(info['Response'][0]['membershipId'])
-            
+
             info = d2.getMembershipsById(membershipID, membershipType)
 
             if 'destinyMemberships' in info['Response'] and len(info['Response']['destinyMemberships']) > 0:
@@ -276,7 +276,69 @@ def print_historical_pve_data(input_data):
         print ("NO DATA FOUND FOR THIS GUARDIAN")
         print ()
 
-def print_current_milestone_information(input_data):
+def print_calculated_stats(input_data):
+    print ("***AGGREGATE STATS***")
+    total_efficiency = 0
+    total_kills = 0
+    total_deaths = 0
+    total_assists = 0
+    
+    data = input_data['Response']
+    if 'allTime' in data['raid']:
+        raid_efficiency = data['raid']['allTime']['efficiency']['basic']['value']
+        total_efficiency = total_efficiency + raid_efficiency
+        total_kills = total_kills + data['raid']['allTime']['kills']['basic']['value']
+        total_deaths = total_deaths + data['raid']['allTime']['deaths']['basic']['value']
+        total_assists = total_assists + data['raid']['allTime']['assists']['basic']['value']
+        
+    data = input_data['Response']
+    if 'allTime' in data['allStrikes']:
+        strike_efficiency = data['allStrikes']['allTime']['efficiency']['basic']['value']
+        total_efficiency = total_efficiency + strike_efficiency
+        total_kills = total_kills + data['allStrikes']['allTime']['kills']['basic']['value']
+        total_deaths = total_deaths + data['allStrikes']['allTime']['deaths']['basic']['value']       
+        total_assists = total_assists + data['allStrikes']['allTime']['assists']['basic']['value']
+    
+    data = input_data['Response']
+    if 'allTime' in data['patrol']:
+        patrol_efficiency = data['patrol']['allTime']['efficiency']['basic']['value']
+        total_efficiency = total_efficiency + patrol_efficiency
+        total_kills = total_kills + data['patrol']['allTime']['kills']['basic']['value']
+        total_deaths = total_deaths + data['patrol']['allTime']['deaths']['basic']['value']
+        total_assists = total_assists + data['patrol']['allTime']['assists']['basic']['value']
+        
+    data = input_data['Response']
+    if 'allTime' in data['allPvP']:
+        pvp_efficiency = data['allPvP']['allTime']['efficiency']['basic']['value']
+        total_efficiency = total_efficiency + pvp_efficiency
+        total_kills = total_kills + data['allPvP']['allTime']['kills']['basic']['value']
+        total_deaths = total_deaths + data['allPvP']['allTime']['deaths']['basic']['value']
+        total_assists = total_assists + data['allPvP']['allTime']['assists']['basic']['value']
+        
+    data = input_data['Response']
+    if 'allTime' in data['story']:
+        story_efficiency = data['story']['allTime']['efficiency']['basic']['value']
+        total_efficiency = total_efficiency + story_efficiency
+        total_kills = total_kills + data['story']['allTime']['kills']['basic']['value']
+        total_deaths = total_deaths + data['story']['allTime']['deaths']['basic']['value']        
+        total_assists = total_assists + data['story']['allTime']['assists']['basic']['value']
+    
+    print ("    Total Kills   : " + str(total_kills))
+    print ("    Total Deaths  : " + str(total_deaths))
+    print ("    K/D           : " + str(total_kills / total_deaths))
+    print ("    Total Assists : " + str(total_assists))
+    print ()
+    print ("    Average Efficiency     : " + str(total_efficiency / 5))
+    calc_eff = (total_kills + total_assists) / total_deaths
+    print ("    Calculated Efficiency  : " + str(calc_eff))
+    print ("        Raid   : " + str(raid_efficiency))
+    print ("        Strike : " + str(strike_efficiency))
+    print ("        PvE    : " + str(patrol_efficiency))
+    print ("        PvP    : " + str(pvp_efficiency))
+    print ("        Story  : " + str(story_efficiency))
+    print ()
+        
+def print_current_milestone_information(input_data): #WIP
     data = input_data['Response']
     print ("***MILESTONE INFORMATION***")
     for key, value in data.items():

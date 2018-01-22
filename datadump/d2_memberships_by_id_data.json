@@ -1,40 +1,40 @@
 {
-    "Message": "Ok",
-    "MessageData": {},
     "Response": {
         "destinyMemberships": [
             {
-                "membershipType": 4,
                 "membershipId": "4611686018472070177",
                 "iconPath": "",
+                "membershipType": 4,
                 "displayName": "guitarhead42#1725"
             }
         ],
         "bungieNetUser": {
-            "isDeleted": false,
-            "successMessageFlags": "0",
-            "profileTheme": 0,
-            "localeInheritDefault": false,
-            "blizzardDisplayName": "guitarhead42#1725",
-            "profilePicture": 0,
+            "membershipId": "17673335",
+            "statusText": "",
             "uniqueName": "17673335",
+            "showActivity": true,
+            "profileTheme": 0,
+            "userTitle": 0,
+            "localeInheritDefault": false,
+            "showGroupMessaging": true,
+            "locale": "en",
+            "lastUpdate": "2018-01-10T06:04:36.329Z",
+            "profileThemeName": "d2cover",
+            "blizzardDisplayName": "guitarhead42#1725",
             "displayName": "guitarhead42",
             "profilePicturePath": "/img/profile/avatars/default_avatar.gif",
-            "firstAccess": "2018-01-10T06:04:36.329Z",
-            "userTitle": 0,
-            "showGroupMessaging": true,
-            "showActivity": true,
-            "profileThemeName": "d2cover",
-            "locale": "en",
             "about": "",
-            "lastUpdate": "2018-01-10T06:04:36.329Z",
             "userTitleDisplay": "Newbie",
-            "membershipId": "17673335",
+            "profilePicture": 0,
+            "isDeleted": false,
+            "successMessageFlags": "0",
             "statusDate": "0001-01-01T00:00:00Z",
-            "statusText": ""
+            "firstAccess": "2018-01-10T06:04:36.329Z"
         }
     },
+    "MessageData": {},
     "ErrorCode": 1,
-    "ErrorStatus": "Success",
-    "ThrottleSeconds": 0
+    "Message": "Ok",
+    "ThrottleSeconds": 0,
+    "ErrorStatus": "Success"
 }

@@ -77,6 +77,10 @@ def main():
                 data = d2.destinyMilestoneInformation()
                 if data != 0:
                     dparse.print_current_milestone_information(data)
+            elif user_in == "stats_agg":
+                data = stats_handler()
+                if data != 0:
+                    dparse.print_calculated_stats(data)
             elif user_in == "!dump":
                 d2.dumpData(membershipID, membershipType, destinyMembershipType, destinyMembershipID, destinyCharacters[0])
             elif user_in == "!q":
