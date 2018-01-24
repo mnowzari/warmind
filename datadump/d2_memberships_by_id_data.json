@@ -1,40 +1,40 @@
 {
     "Response": {
+        "bungieNetUser": {
+            "profileTheme": 0,
+            "statusDate": "0001-01-01T00:00:00Z",
+            "userTitleDisplay": "Newbie",
+            "locale": "en",
+            "localeInheritDefault": false,
+            "firstAccess": "2018-01-10T06:04:36.329Z",
+            "membershipId": "17673335",
+            "profileThemeName": "d2cover",
+            "lastUpdate": "2018-01-10T06:04:36.329Z",
+            "successMessageFlags": "0",
+            "showGroupMessaging": true,
+            "profilePicturePath": "/img/profile/avatars/default_avatar.gif",
+            "isDeleted": false,
+            "profilePicture": 0,
+            "about": "",
+            "userTitle": 0,
+            "displayName": "guitarhead42",
+            "blizzardDisplayName": "guitarhead42#1725",
+            "showActivity": true,
+            "statusText": "",
+            "uniqueName": "17673335"
+        },
         "destinyMemberships": [
             {
-                "membershipId": "4611686018472070177",
-                "iconPath": "",
                 "membershipType": 4,
-                "displayName": "guitarhead42#1725"
+                "iconPath": "",
+                "displayName": "guitarhead42#1725",
+                "membershipId": "4611686018472070177"
             }
-        ],
-        "bungieNetUser": {
-            "membershipId": "17673335",
-            "statusText": "",
-            "uniqueName": "17673335",
-            "showActivity": true,
-            "profileTheme": 0,
-            "userTitle": 0,
-            "localeInheritDefault": false,
-            "showGroupMessaging": true,
-            "locale": "en",
-            "lastUpdate": "2018-01-10T06:04:36.329Z",
-            "profileThemeName": "d2cover",
-            "blizzardDisplayName": "guitarhead42#1725",
-            "displayName": "guitarhead42",
-            "profilePicturePath": "/img/profile/avatars/default_avatar.gif",
-            "about": "",
-            "userTitleDisplay": "Newbie",
-            "profilePicture": 0,
-            "isDeleted": false,
-            "successMessageFlags": "0",
-            "statusDate": "0001-01-01T00:00:00Z",
-            "firstAccess": "2018-01-10T06:04:36.329Z"
-        }
+        ]
     },
-    "MessageData": {},
-    "ErrorCode": 1,
     "Message": "Ok",
+    "MessageData": {},
     "ThrottleSeconds": 0,
+    "ErrorCode": 1,
     "ErrorStatus": "Success"
 }

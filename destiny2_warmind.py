@@ -71,8 +71,21 @@ def main():
                 data = stats_handler()
                 if data != 0:   
                     dparse.print_historical_story_data(data)
-            elif user_in == "new_guard":
-                print ("WIP")
+            elif user_in == "!new_guard":
+                print ("Enter Complete Destiny 2 gamertag")
+                user_in = str(input())
+                
+                dparse.reset_access_information()
+                access_creds = dparse.get_access_information(user_in)
+
+                if (access_creds != 0):       
+                    membershipID = access_creds[0]
+                    membershipType = access_creds[1]
+                    destinyMembershipType = access_creds[2]
+                    destinyMembershipID = access_creds[3]
+                    destinyCharacters = access_creds[4]        
+                else:
+                    print ("Could not find the requested Guardian. Maybe the Guardian is missing its Ghost?")
             elif user_in == "!milestones":
                 data = d2.destinyMilestoneInformation()
                 if data != 0:
@@ -81,7 +94,7 @@ def main():
                 data = stats_handler()
                 if data != 0:
                     dparse.print_calculated_stats(data)
-            elif user_in == "!dump":
+            elif user_in == "dump":
                 d2.dumpData(membershipID, membershipType, destinyMembershipType, destinyMembershipID, destinyCharacters[0])
             elif user_in == "!q":
                 break

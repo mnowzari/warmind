@@ -145,5 +145,3 @@ def dumpData(membershipId, membershipType, destinyMembershipType, destinyMembers
     print ("    Output succesfully dumped to file d2_milestone_information.json")
     
     print ()
-p = searchUsers('moarality')
-print (p)

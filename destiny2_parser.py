@@ -17,13 +17,21 @@ def load_json_file(filename):
         data = json.load(json_file)
     return data
 
+def reset_access_information():
+    global membershipID, destinyMembershipType, destinyMembershipID, destinyCharacters
+    membershipID = 0
+    membershipType = -1
+    destinyMembershipType = 0
+    destinyMembershipID = 0
+    destinyCharacters = []
+    
 def get_access_information(username): #returns array of access creds 
     global membershipID, destinyMembershipType, destinyMembershipID, destinyCharacters
     access_info = []
-    
+
     if membershipID == 0:
         info = d2.searchUsers(username)
-        
+
         if len(info['Response']) > 0:
             
             membershipID = int(info['Response'][0]['membershipId'])
@@ -37,7 +45,7 @@ def get_access_information(username): #returns array of access creds
                 character = d2.getCharacter(destinyMembershipType, destinyMembershipID)
                 if character['ErrorCode'] != 1601: #in the event Bungie's servers cannot find a Destiny account
                     character = character['Response']['characters']['data']
-                    
+
                     for key, value in character.items():
                         destinyCharacters.append(key)
                         
@@ -283,6 +291,12 @@ def print_calculated_stats(input_data):
     total_deaths = 0
     total_assists = 0
     
+    raid_efficiency = 0
+    strike_efficiency = 0
+    pvp_efficiency = 0
+    story_efficiency = 0
+    patrol_efficiency = 0
+    
     data = input_data['Response']
     if 'allTime' in data['raid']:
         raid_efficiency = data['raid']['allTime']['efficiency']['basic']['value']
@@ -325,11 +339,17 @@ def print_calculated_stats(input_data):
     
     print ("    Total Kills   : " + str(total_kills))
     print ("    Total Deaths  : " + str(total_deaths))
-    print ("    K/D           : " + str(total_kills / total_deaths))
+    
+    if total_deaths != 0:
+        print ("    K/D           : " + str(total_kills / total_deaths))
+        calc_eff = (total_kills + total_assists) / total_deaths
+
+    else: 
+        print ("    K/D           : " + str(total_kills))
+        calc_eff = (total_kills + total_assists)
+        
     print ("    Total Assists : " + str(total_assists))
     print ()
-    print ("    Average Efficiency     : " + str(total_efficiency / 5))
-    calc_eff = (total_kills + total_assists) / total_deaths
     print ("    Calculated Efficiency  : " + str(calc_eff))
     print ("        Raid   : " + str(raid_efficiency))
     print ("        Strike : " + str(strike_efficiency))
