@@ -15,12 +15,14 @@ def stats_handler():
     for i in range (0, len(destinyCharacters)):
         print (str(i + 1) + ".) " + str(destinyCharacters[i]))
         i = i + 1
+        
     user_in = input()
     
     if int(user_in) <= len(destinyCharacters):
         data = d2.getHistoricalStats(destinyMembershipType, destinyMembershipID, destinyCharacters[int(user_in) - 1])
         return data
     else:
+        print ("INVALID SELECTION.")
         return 0
 
 def main():
@@ -72,6 +74,18 @@ def main():
                 data = stats_handler()
                 if data != 0:   
                     dparse.print_historical_story_data(data)
+            elif user_in == "act_hist":
+                print ("Select a Guardian: ")
+                for i in range (0, len(destinyCharacters)):
+                    print (str(i + 1) + ".) " + str(destinyCharacters[i]))
+                    i = i + 1
+        
+                user_in = input()
+                
+                data = d2.getActivityHistory(destinyMembershipType, destinyMembershipID, destinyCharacters[int(user_in) - 1], 6)
+                
+                dparse.print_activity_history(data)
+                
             elif user_in == "!new_guard":
                 print ("Enter Complete Destiny 2 gamertag")
                 user_in = str(input())

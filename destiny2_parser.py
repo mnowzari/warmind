@@ -355,9 +355,9 @@ def print_calculated_stats(input_data):
     print ("        PvP    : " + str(pvp_efficiency))
     print ("        Story  : " + str(story_efficiency))
     print ()
-    print ("    Total Revives Performed  : " + str(total_revives_perf))
-    print ("    Total Revives Recieved   : " + str(total_revives_rec))
-    print ("    Revival Effectiveness    : " + str(total_revives_perf / total_revives_rec))
+    print ("    Total Resurrections Performed  : " + str(total_revives_perf))
+    print ("    Total Resurrections Recieved   : " + str(total_revives_rec))
+    print ("    Resurrection Efficiency        : " + str(total_revives_perf / total_revives_rec))
     
 def print_current_milestone_information(input_data): #WIP
     data = input_data['Response']
@@ -374,3 +374,11 @@ def print_current_milestone_information(input_data): #WIP
             elif 'questItemHash' in data[mile_hash]['availableQuests'][0]:
                 print ()
 
+def print_activity_history(input_data):
+    data = input_data['Response']
+    
+    if 'activities' in data:
+        for i in range(len(data['activities'])):
+            act_hash = data['activities'][i]['activityDetails']['directorActivityHash']
+            #act_json = d2.destinyManifestRequestActivityDefinition(act_hash)
+            #print (act_json)
