@@ -168,12 +168,12 @@ def print_character_sheet(data):
 def historical_data_helper(data):
     kills = int(data['kills']['basic']['displayValue'])
     deaths = int(data['deaths']['basic']['displayValue'])
+    print ("    Efficiency             : " + data['efficiency']['basic']['displayValue'])
     print ("    Total Kills            : " + str(kills))
     print ("    Total Deaths           : " + str(deaths))
-    print ("    K/D                    : " + str(kills/deaths))
-
     print ("    Assists                : " + data['assists']['basic']['displayValue'])
-
+    print ("    K/D                    : " + str(kills/deaths))
+    print ()
     print ("    Best Weapon Type       : " + data['weaponBestType']['basic']['displayValue'])
     print ("    Precision Kills        : " + data['precisionKills']['basic']['displayValue'])
     print ("    Longest Kill Distance  : " + data['longestKillDistance']['basic']['displayValue'] + "m")
@@ -201,7 +201,6 @@ def historical_data_helper(data):
     print ()
     print ("    Best Single-Game Kills  : " + data['bestSingleGameKills']['basic']['displayValue'])
     print ("    Longest Killing Spree   : " + data['longestKillSpree']['basic']['displayValue'])
-    print ("    Efficiency              : " + data['efficiency']['basic']['displayValue'])
     print ()
     print ("    Orbs Dropped            : " + data['orbsDropped']['basic']['displayValue'])
     print ("    Orbs Gathered           : " + data['orbsGathered']['basic']['displayValue'])
@@ -253,7 +252,7 @@ def print_historical_raid_data(input_data):
         print ("    "+ data['secondsPlayed']['basic']['displayValue'] + " spent in activity")
         print ()
     else:
-        print ("NO DATA FOUND FOR THIS GUARDIAN")
+        print ("INSUFFICIENT DATA FOR MEANINGFUL ANSWER.")
         print ()
         
 def print_historical_story_data(input_data):
