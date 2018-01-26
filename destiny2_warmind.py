@@ -40,6 +40,7 @@ def main():
         destinyCharacters = access_creds[4]
         
         while True:
+            print ()
             print ("Enter a command. Type '!help' for a list of commands.")
             user_in = str(input())
             

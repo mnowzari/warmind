@@ -162,8 +162,6 @@ def print_character_sheet(data):
         
         print ()
         print ("    ~"+ str(time_spent_playing) + " hours on record")
-        print ()
-        
 
 def historical_data_helper(data):
     kills = int(data['kills']['basic']['displayValue'])
@@ -220,7 +218,6 @@ def print_historical_strike_data(input_data):
         print ()
     else:
         print ("NO DATA FOUND FOR THIS GUARDIAN")
-        print ()        
     
 def print_historical_pvp_data(input_data):    
     print ("***All Historical PvP Data***")
@@ -242,7 +239,6 @@ def print_historical_pvp_data(input_data):
         print ()
     else:
         print ("NO DATA FOUND FOR THIS GUARDIAN")
-        print ()
         
 def print_historical_raid_data(input_data):
     print ("***All Historical Raid Data***")
@@ -253,7 +249,6 @@ def print_historical_raid_data(input_data):
         print ()
     else:
         print ("INSUFFICIENT DATA FOR MEANINGFUL ANSWER.")
-        print ()
         
 def print_historical_story_data(input_data):
     print ("***All Historical Story Data***")
@@ -264,7 +259,6 @@ def print_historical_story_data(input_data):
         print ()
     else: 
         print ("NO DATA FOUND FOR THIS GUARDIAN")
-        print ()
         
 def print_historical_pve_data(input_data):
     print ("***All Historical PvE Data***")
@@ -281,14 +275,14 @@ def print_historical_pve_data(input_data):
         print ()
     else:
         print ("NO DATA FOUND FOR THIS GUARDIAN")
-        print ()
 
 def print_calculated_stats(input_data):
     print ("***AGGREGATE STATS***")
-    total_efficiency = 0
     total_kills = 0
     total_deaths = 0
     total_assists = 0
+    total_revives_perf = 0
+    total_revives_rec = 0
     
     raid_efficiency = 0
     strike_efficiency = 0
@@ -299,43 +293,48 @@ def print_calculated_stats(input_data):
     data = input_data['Response']
     if 'allTime' in data['raid']:
         raid_efficiency = data['raid']['allTime']['efficiency']['basic']['value']
-        total_efficiency = total_efficiency + raid_efficiency
         total_kills = total_kills + data['raid']['allTime']['kills']['basic']['value']
         total_deaths = total_deaths + data['raid']['allTime']['deaths']['basic']['value']
         total_assists = total_assists + data['raid']['allTime']['assists']['basic']['value']
+        total_revives_perf = total_revives_perf + data['raid']['allTime']['resurrectionsPerformed']['basic']['value']
+        total_revives_rec = total_revives_rec + data['raid']['allTime']['resurrectionsReceived']['basic']['value']
         
     data = input_data['Response']
     if 'allTime' in data['allStrikes']:
         strike_efficiency = data['allStrikes']['allTime']['efficiency']['basic']['value']
-        total_efficiency = total_efficiency + strike_efficiency
         total_kills = total_kills + data['allStrikes']['allTime']['kills']['basic']['value']
         total_deaths = total_deaths + data['allStrikes']['allTime']['deaths']['basic']['value']       
         total_assists = total_assists + data['allStrikes']['allTime']['assists']['basic']['value']
+        total_revives_perf = total_revives_perf + data['allStrikes']['allTime']['resurrectionsPerformed']['basic']['value']
+        total_revives_rec = total_revives_rec + data['allStrikes']['allTime']['resurrectionsReceived']['basic']['value']
     
     data = input_data['Response']
     if 'allTime' in data['patrol']:
         patrol_efficiency = data['patrol']['allTime']['efficiency']['basic']['value']
-        total_efficiency = total_efficiency + patrol_efficiency
         total_kills = total_kills + data['patrol']['allTime']['kills']['basic']['value']
         total_deaths = total_deaths + data['patrol']['allTime']['deaths']['basic']['value']
         total_assists = total_assists + data['patrol']['allTime']['assists']['basic']['value']
+        total_revives_perf = total_revives_perf + data['patrol']['allTime']['resurrectionsPerformed']['basic']['value']
+        total_revives_rec = total_revives_rec + data['patrol']['allTime']['resurrectionsReceived']['basic']['value']
         
     data = input_data['Response']
     if 'allTime' in data['allPvP']:
         pvp_efficiency = data['allPvP']['allTime']['efficiency']['basic']['value']
-        total_efficiency = total_efficiency + pvp_efficiency
         total_kills = total_kills + data['allPvP']['allTime']['kills']['basic']['value']
         total_deaths = total_deaths + data['allPvP']['allTime']['deaths']['basic']['value']
         total_assists = total_assists + data['allPvP']['allTime']['assists']['basic']['value']
+        total_revives_perf = total_revives_perf + data['allPvP']['allTime']['resurrectionsPerformed']['basic']['value']
+        total_revives_rec = total_revives_rec + data['allPvP']['allTime']['resurrectionsReceived']['basic']['value']
         
     data = input_data['Response']
     if 'allTime' in data['story']:
         story_efficiency = data['story']['allTime']['efficiency']['basic']['value']
-        total_efficiency = total_efficiency + story_efficiency
         total_kills = total_kills + data['story']['allTime']['kills']['basic']['value']
         total_deaths = total_deaths + data['story']['allTime']['deaths']['basic']['value']        
         total_assists = total_assists + data['story']['allTime']['assists']['basic']['value']
-    
+        total_revives_perf = total_revives_perf + data['story']['allTime']['resurrectionsPerformed']['basic']['value']
+        total_revives_rec = total_revives_rec + data['story']['allTime']['resurrectionsReceived']['basic']['value']
+        
     print ("    Total Kills   : " + str(total_kills))
     print ("    Total Deaths  : " + str(total_deaths))
     
@@ -356,7 +355,10 @@ def print_calculated_stats(input_data):
     print ("        PvP    : " + str(pvp_efficiency))
     print ("        Story  : " + str(story_efficiency))
     print ()
-        
+    print ("    Total Revives Performed  : " + str(total_revives_perf))
+    print ("    Total Revives Recieved   : " + str(total_revives_rec))
+    print ("    Revival Effectiveness    : " + str(total_revives_perf / total_revives_rec))
+    
 def print_current_milestone_information(input_data): #WIP
     data = input_data['Response']
     print ("***MILESTONE INFORMATION***")

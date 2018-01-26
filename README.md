@@ -25,7 +25,7 @@ List of commands:
 
 -!help: Brings up this help menu
 
--!new_guard: Enter a new Guardian (WIP)
+-!new_guard: Enter a new Guardian
 
 -!dump: Downloads raw data in the form of JSON files from Bungie servers to your computer. Useful if you're a developer and know what to do with JSON. 
 
