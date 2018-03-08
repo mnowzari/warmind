@@ -380,5 +380,10 @@ def print_activity_history(input_data):
     if 'activities' in data:
         for i in range(len(data['activities'])):
             act_hash = data['activities'][i]['activityDetails']['directorActivityHash']
-            #act_json = d2.destinyManifestRequestActivityDefinition(act_hash)
+            act_period = data['activities'][i]['period']
+            act_time_played = data['activities'][i]['values']['timePlayedSeconds']['basic']['displayValue']
+            
+            #act_json = d2.getPostGameCarnageReport(act_hash)
             #print (act_json)
+            print (act_period)
+            print ("    Time Played: " + act_time_played)

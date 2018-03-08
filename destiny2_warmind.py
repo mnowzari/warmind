@@ -118,11 +118,11 @@ def main():
         print ("Could not find the requested Guardian. Maybe the Guardian is missing its Ghost?")
         
 def display_help():
-    print ("DESTINY 2 WARMIND HELP")
-    print ("------------------------------------------------------------------------------")
+    print ("____DESTINY 2 WARMIND HELP___")
+
     file = open("d2_warmind_help.txt", "r")
     s = file.readlines()
     for i in s:
-        print("-" + i)
+        print("-" + i.replace("\n", ""))
     print ()
 main()

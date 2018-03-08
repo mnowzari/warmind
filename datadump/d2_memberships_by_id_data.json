@@ -1,40 +1,40 @@
 {
+    "ErrorCode": 1,
     "Response": {
         "bungieNetUser": {
-            "profileTheme": 0,
-            "statusDate": "0001-01-01T00:00:00Z",
-            "userTitleDisplay": "Newbie",
-            "locale": "en",
-            "localeInheritDefault": false,
-            "firstAccess": "2018-01-10T06:04:36.329Z",
-            "membershipId": "17673335",
-            "profileThemeName": "d2cover",
-            "lastUpdate": "2018-01-10T06:04:36.329Z",
-            "successMessageFlags": "0",
-            "showGroupMessaging": true,
-            "profilePicturePath": "/img/profile/avatars/default_avatar.gif",
-            "isDeleted": false,
-            "profilePicture": 0,
-            "about": "",
             "userTitle": 0,
-            "displayName": "guitarhead42",
+            "showGroupMessaging": true,
+            "userTitleDisplay": "Newbie",
+            "isDeleted": false,
+            "profileTheme": 0,
+            "profilePicture": 0,
+            "locale": "en",
+            "successMessageFlags": "0",
+            "lastUpdate": "2018-01-10T06:04:36.329Z",
+            "about": "",
             "blizzardDisplayName": "guitarhead42#1725",
             "showActivity": true,
+            "membershipId": "17673335",
+            "profilePicturePath": "/img/profile/avatars/default_avatar.gif",
+            "localeInheritDefault": false,
+            "profileThemeName": "d2cover",
             "statusText": "",
-            "uniqueName": "17673335"
+            "displayName": "guitarhead42",
+            "uniqueName": "17673335",
+            "statusDate": "0001-01-01T00:00:00Z",
+            "firstAccess": "2018-01-10T06:04:36.329Z"
         },
         "destinyMemberships": [
             {
+                "membershipId": "4611686018472070177",
+                "displayName": "guitarhead42",
                 "membershipType": 4,
-                "iconPath": "",
-                "displayName": "guitarhead42#1725",
-                "membershipId": "4611686018472070177"
+                "iconPath": ""
             }
         ]
     },
     "Message": "Ok",
-    "MessageData": {},
+    "ErrorStatus": "Success",
     "ThrottleSeconds": 0,
-    "ErrorCode": 1,
-    "ErrorStatus": "Success"
+    "MessageData": {}
 }

@@ -1,67 +1,60 @@
 {
+    "ErrorCode": 1,
     "Response": {
+        "itemComponents": {},
         "characters": {
             "privacy": 1,
             "data": {
                 "2305843009310558777": {
-                    "raceHash": 3887404748,
-                    "membershipType": 4,
-                    "dateLastPlayed": "2018-01-24T07:43:23Z",
-                    "classType": 0,
-                    "minutesPlayedThisSession": "40",
+                    "baseCharacterLevel": 25,
+                    "minutesPlayedTotal": "4038",
                     "genderHash": 2204441813,
-                    "membershipId": "4611686018472070177",
-                    "percentToNextLevel": 0.0,
-                    "baseCharacterLevel": 20,
-                    "light": 302,
-                    "minutesPlayedTotal": "3454",
-                    "classHash": 3655393761,
-                    "raceType": 0,
-                    "levelProgression": {
-                        "stepIndex": 20,
-                        "dailyLimit": 0,
-                        "nextLevelAt": 10000,
-                        "level": 20,
-                        "currentProgress": 146000,
-                        "progressionHash": 1716568313,
-                        "levelCap": 20,
-                        "progressToNextLevel": 0,
-                        "dailyProgress": 0,
-                        "weeklyLimit": 0,
-                        "weeklyProgress": 0
+                    "classType": 0,
+                    "stats": {
+                        "392767087": 5,
+                        "1943323491": 2,
+                        "1935470627": 311,
+                        "2996146975": 7
                     },
                     "emblemHash": 745759695,
-                    "characterId": "2305843009310558777",
+                    "raceType": 0,
+                    "membershipType": 4,
+                    "dateLastPlayed": "2018-02-25T19:06:35Z",
+                    "levelProgression": {
+                        "progressionHash": 1716568313,
+                        "stepIndex": 25,
+                        "dailyLimit": 0,
+                        "nextLevelAt": 10000,
+                        "dailyProgress": 0,
+                        "weeklyLimit": 0,
+                        "progressToNextLevel": 0,
+                        "levelCap": 25,
+                        "weeklyProgress": 0,
+                        "level": 25,
+                        "currentProgress": 196000
+                    },
+                    "light": 311,
                     "emblemColor": {
-                        "red": 4,
                         "green": 4,
+                        "alpha": 255,
                         "blue": 14,
-                        "alpha": 255
+                        "red": 4
                     },
+                    "percentToNextLevel": 0.0,
+                    "characterId": "2305843009310558777",
+                    "classHash": 3655393761,
                     "emblemPath": "/common/destiny2_content/icons/dfe9348554633b998b6d038b2079e5a1.jpg",
+                    "membershipId": "4611686018472070177",
+                    "raceHash": 3887404748,
                     "genderType": 1,
-                    "stats": {
-                        "392767087": 8,
-                        "1885944937": 299,
-                        "3555269338": 86,
-                        "4188031367": 20,
-                        "1943323491": 6,
-                        "144602215": 0,
-                        "3897883278": 0,
-                        "1935470627": 302,
-                        "4244567218": 0,
-                        "2996146975": 2,
-                        "1735777505": 0
-                    },
-                    "emblemBackgroundPath": "/common/destiny2_content/icons/f98f3ed6fadd059dc2bd31f2ca59c4ce.jpg"
+                    "emblemBackgroundPath": "/common/destiny2_content/icons/f98f3ed6fadd059dc2bd31f2ca59c4ce.jpg",
+                    "minutesPlayedThisSession": "19"
                 }
             }
-        },
-        "itemComponents": {}
+        }
     },
     "Message": "Ok",
-    "MessageData": {},
+    "ErrorStatus": "Success",
     "ThrottleSeconds": 0,
-    "ErrorCode": 1,
-    "ErrorStatus": "Success"
+    "MessageData": {}
 }

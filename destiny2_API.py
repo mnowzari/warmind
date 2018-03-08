@@ -66,6 +66,10 @@ def getActivityHistory(destinyMembershipType, destinyMembershipId, characterId, 
     r = requests.get(base_url + "/" + str(destinyMembershipType) + "/Account/" + str(destinyMembershipId) + "/Character/" + str(characterId) + "/Stats/Activities/?lc=en&components=" + str(activity_mode), headers=HEADERS)
     return r.json()
     
+def getPostGameCarnageReport(activity_id):
+    r = requests.get(base_url + "/Stats/PostGameCarnageReport/" + str(activity_id), headers=HEADERS)
+    return r.json()
+    
 def getCharacter(destinyMembershipType, destinyMembershipId):    
     r = requests.get(base_url + "/" + str(destinyMembershipType) + "/Profile/" + str(destinyMembershipId) + "/?lc=en&components=200", headers=HEADERS)
     return r.json()
